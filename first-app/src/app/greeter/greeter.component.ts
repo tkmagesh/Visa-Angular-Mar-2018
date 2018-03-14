@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 export class GreeterComponent{
 	message = '';
-	onGreeterClick(){
-		this.message = 'Greeter message will be displayed here';
+	onGreetClick(userName){
+		//var userName = prompt('Enter the username :')
+		this.message = `Hi ${userName}, Have a nice day!`;
 	}
 }
