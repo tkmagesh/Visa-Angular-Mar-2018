@@ -21,9 +21,10 @@
  	<ol>
  		<li *ngFor="let bug of bugs">
  			<span class="bugname" 
+ 				title="{{bug.name}}"
  				[ngClass]="{closed : bug.isClosed}"
  				(click)="onBugNameClick(bug)">
- 				{{bug.name | trimText}}</span>
+ 				{{bug.name | trimText:40}}</span>
  			<div class="datetime">[Created At]</div>
  		</li>
  	</ol>
