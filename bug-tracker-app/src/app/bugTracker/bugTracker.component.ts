@@ -10,10 +10,10 @@ export class BugTrackerComponent{
 	
 	bugs : Bug[] = [];
 
-	bugOperations : BugOperationsService = null;
+	//bugOperations : BugOperationsService = null;
 
-	constructor(_bugOperations : BugOperationsService){
-		this.bugOperations = _bugOperations;
+	constructor(private bugOperations : BugOperationsService){
+		//this.bugOperations = _bugOperations;
 	}
 	
 	onCreateNewClick(bugName : string){
