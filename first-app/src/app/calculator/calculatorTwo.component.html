@@ -13,4 +13,4 @@
 <!-- <input type="button" value="Calculate" (click)="calculate()"> -->
 <input type="button" value="Calculate" (click)="model[operator]()" />
 
-<app-calculator-result></app-calculator-result>
+<app-calculator-result [data]="model.result"></app-calculator-result>
