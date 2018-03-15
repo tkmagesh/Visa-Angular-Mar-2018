@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 export class CalculatorResultComponent{
 	
 	@Input()
-	data : number = 0;	
+	data : number = 0;
 }
