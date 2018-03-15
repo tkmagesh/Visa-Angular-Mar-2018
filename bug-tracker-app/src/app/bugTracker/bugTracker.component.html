@@ -1,7 +1,7 @@
 <section class="stats">
  	<span class="closed">1</span>
  	<span> / </span>
- 	<span>2</span>
+ 	<span>{{bugs.length}}</span>
  </section>
  <section class="sort">
  	<label for="">Order By :</label>
@@ -14,17 +14,13 @@
  </section>
  <section class="edit">
  	<label for="">Bug Name :</label>
- 	<input type="text">
- 	<input type="button" value="Create New">
+ 	<input type="text" #txtBugName />
+ 	<input type="button" value="Create New" (click)="onCreateNewClick(txtBugName.value)">
  </section>
  <section class="list">
  	<ol>
- 		<li>
- 			<span class="bugname">[This is bug - 1]</span>
- 			<div class="datetime">[Created At]</div>
- 		</li>
- 		<li>
- 			<span class="bugname closed">[This is bug - 2]</span>
+ 		<li *ngFor="let bug of bugs">
+ 			<span class="bugname">{{bug | json}}</span>
  			<div class="datetime">[Created At]</div>
  		</li>
  	</ol>
