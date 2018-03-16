@@ -17,8 +17,6 @@ export class BugTrackerComponent implements OnInit{
 		this.bugServer
 			.getAll()
 			.subscribe(bugs => this.bugs = bugs);
-
-
 	}
 
 	constructor(private bugServer : BugServerService){
