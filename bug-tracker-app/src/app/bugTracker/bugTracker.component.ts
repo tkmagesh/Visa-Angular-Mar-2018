@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Bug } from './models/Bug';
 import { BugStorageService } from './services/bugStorage.service';
 
@@ -6,21 +6,23 @@ import { BugStorageService } from './services/bugStorage.service';
 	selector : 'app-bug-tracker',
 	templateUrl : 'bugTracker.component.html'
 })
-export class BugTrackerComponent{
+export class BugTrackerComponent implements OnInit{
 	
 	bugs : Bug[] = [];
 	sortBugBy : string = 'name';
 	sortBugDescending : boolean = false;
 	
 	
-
-	constructor(private bugStorage : BugStorageService){
+	ngOnInit(){
 		this.bugs = this.bugStorage.getAll();
 	}
+
+	constructor(private bugStorage : BugStorageService){
+		
+	}
 	
-	onCreateNewClick(bugName : string){
-		let newBug = this.bugStorage.addNew(bugName);
-		this.bugs = [...this.bugs, newBug];
+	onNewBug(bug : Bug){
+		this.bugs = [...this.bugs, bug];
 	}
 
 	onBugNameClick(bugToToggle : Bug){

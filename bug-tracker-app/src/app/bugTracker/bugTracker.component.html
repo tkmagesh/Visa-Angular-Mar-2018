@@ -9,14 +9,7 @@
  	<label for="">Descending ? :</label>
  	<input type="checkbox" (change)="sortBugDescending = $event.target.checked">
  </section>
- <section class="edit">
- 	<form onSubmit="return false;">
-	 	<label for="">Bug Name :</label>
-	 	<input type="text" #txtBugName />
-	 	<input type="submit" value="Create New" (click)="onCreateNewClick(txtBugName.value)"
-	 	>
-	 </form>
- </section>
+ <app-bug-edit (create)="onNewBug($event)"></app-bug-edit>
  <section class="list">
  	<input type="range" min="30" max="100" (change)="trimLength=$event.target.value" value="30">
  	<ol>
