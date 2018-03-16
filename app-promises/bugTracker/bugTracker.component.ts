@@ -16,7 +16,7 @@ export class BugTrackerComponent implements OnInit{
 	ngOnInit(){
 		this.bugServer
 			.getAll()
-			.subscribe(bugs => this.bugs = bugs);
+			.then(bugs => this.bugs = bugs);
 
 
 	}
@@ -32,7 +32,7 @@ export class BugTrackerComponent implements OnInit{
 	onBugNameClick(bugToToggle : Bug){
 		this.bugServer
 			.toggle(bugToToggle)
-			.subscribe(toggledBug => this.bugs = this.bugs.map(bug => bug.id === bugToToggle.id ? toggledBug : bug));
+			.then(toggledBug => this.bugs = this.bugs.map(bug => bug.id === bugToToggle.id ? toggledBug : bug));
 	}
 
 	onRemoveClosedClick(){
@@ -40,7 +40,7 @@ export class BugTrackerComponent implements OnInit{
 			if (this.bugs[index].isClosed){
 				this.bugServer
 					.remove(this.bugs[index])
-					.subscribe(response => this.bugs.splice(index, 1));
+					.then(response => this.bugs.splice(index, 1));
 			}
 		}
 	}

@@ -1,45 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Bug } from '../models/Bug';
 import { BugOperationsService } from './bugOperations.service';
-import axios from 'axios';
-
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import'rxjs/add/operator/map';
 
 @Injectable()
 export class BugServerService{
 	private baseUrl  = 'http://localhost:3000/bugs';
 
-	constructor(private bugOperations : BugOperationsService){
+	constructor(private bugOperations : BugOperationsService, private http : Http){
 
 	}
 
-	getAll() : Promise<Bug[]>{
-		/*var p1 = axios.get(this.baseUrl);
-		var p2 = p1.then(response => {
-			return response.data;
-		});
-		return p2;*/
-
-		return axios
+	getAll() : Observable<Bug[]>{
+		return this.http
 			.get(this.baseUrl)
-			.then(response => response.data)
+			.map(response => response.json());
 	}
 
-	addNew(bugName : string) : Promise<Bug> {
+	addNew(bugName : string) : Observable<Bug> {
 		let newBugData = this.bugOperations.createNew(bugName);
-		return axios
+		return this.http
 			.post(this.baseUrl, newBugData)
-			.then(response => response.data);
+			.map(response => response.json());
 	}
 
-	toggle(bugToToggle : Bug) : Promise<Bug> {
+	toggle(bugToToggle : Bug) : Observable<Bug> {
 		let toggledBugData = this.bugOperations.toggle(bugToToggle);
-		return axios
+		return this.http
 			.put(`${this.baseUrl}/${bugToToggle.id}`, toggledBugData)
-			.then(response => response.data);
+			.map(response => response.json());
 	}
-	remove(bug : Bug) : Promise<any>{
-		return axios
+	remove(bug : Bug) : Observable<any>{
+		return this.http
 			.delete(`${this.baseUrl}/${bug.id}`)
-			.then(response => response.data);
+			.map(response => response.json());
 	}
 }
