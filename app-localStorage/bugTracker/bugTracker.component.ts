@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Bug } from './models/Bug';
 import { BugStorageService } from './services/bugStorage.service';
-import axios from 'axios';
-import { BugOperationsService } from './services/bugOperations.service';
-
 
 @Component({
 	selector : 'app-bug-tracker',
@@ -17,16 +14,10 @@ export class BugTrackerComponent implements OnInit{
 	
 	
 	ngOnInit(){
-		//this.bugs = this.bugStorage.getAll();
-		var p = axios.get('http://localhost:3000/bugs');
-		p.then(response => {
-			this.bugs = response.data;
-		})
-
-
+		this.bugs = this.bugStorage.getAll();
 	}
 
-	constructor(private bugStorage : BugStorageService, private bugOperations : BugOperationsService){
+	constructor(private bugStorage : BugStorageService){
 		
 	}
 	
@@ -35,14 +26,8 @@ export class BugTrackerComponent implements OnInit{
 	}
 
 	onBugNameClick(bugToToggle : Bug){
-		//let toggledBug = this.bugStorage.toggle(bugToToggle);
-		let toggledBugData = this.bugOperations.toggle(bugToToggle);
-		var p = axios.put('http://localhost:3000/bugs/' + bugToToggle.id, toggledBugData);
-		p.then(response => {
-			var toggledBug = response.data;
-			this.bugs = this.bugs.map(bug => bug.id === bugToToggle.id ? toggledBug : bug);
-		});
-		
+		let toggledBug = this.bugStorage.toggle(bugToToggle);
+		this.bugs = this.bugs.map(bug => bug === bugToToggle ? toggledBug : bug);
 	}
 
 	onRemoveClosedClick(){
